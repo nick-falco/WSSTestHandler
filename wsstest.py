@@ -25,7 +25,7 @@ sleep for 5 seconds and force an exception with exit code 1 *before* writing dat
 .../irisws/wsstest/1/query?force_sleep=5&force_error=before&force_exit_code=3&nodata=404
 
 force an exception with exit code 1 *before* writing data to std-out and write a cutom error message to std-error
-.../irisws/wsstest/1/query?force_error=before&force_exit_code=1&force_error_msg='my custom error message'&nodata=404
+.../irisws/wsstest/1/query?force_error=before&force_exit_code=1&error_msg='my custom error message'&nodata=404
 '''
 
 from argparse import ArgumentParser
@@ -46,7 +46,7 @@ def parse_arguments():
     parser.add_argument('--force_error', help=("Force the handler to exit with an error before or after writing to output. "
                                              "Choose between 'before', 'runtime', 'after' indicating whether to exit "
                                              "with an error before, at runtime (while), or after writing to std-out."), type=str, default="")
-    parser.add_argument('--force_error_msg', help="Force a particular error message to be written to stderror.", type=str)
+    parser.add_argument('--error_msg', help="Force a particular error message to be written to stderror.", type=str)
     parser.add_argument('--force_exit_code', help="Force the handler to exit with a particular exit code when an error occurs.", type=int)
     parser.add_argument('--force_sleep', help="Force the handler to sleep for a certain number of seconds before exiting.", default=0, type=float)
     parser.add_argument('--runtime_error_level', help="Set the minimum level of recursion (deepness) to call before raising a runtime error.", default=0, type=int)
@@ -66,8 +66,8 @@ class WSSTest(object):
         # Force the handler to sleep for an allotted amount of time (Default = 0)
         time.sleep(int(self.args.force_sleep))
         # Force the handler to return a particular error message
-        if self.args.force_error_msg:
-            msg = self.args.force_error_msg
+        if self.args.error_msg:
+            msg = self.args.error_msg
         # Force the handler to exit with a certain code.
         if self.args.force_exit_code:
             exitcode = int(self.args.force_exit_code)

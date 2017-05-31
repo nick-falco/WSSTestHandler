@@ -29,4 +29,4 @@ sleep for 5 seconds and force an exception with exit code 1 *before* writing dat
 
 force an exception with exit code 1 *before* writing data to std-out and write a cutom error message to std-error
 
-```.../irisws/wsstest/1/query?force_error=before&force_exit_code=1&force_error_msg='my custom error message'&nodata=404```
+```.../irisws/wsstest/1/query?force_error=before&force_exit_code=1&error_msg='my custom error message'&nodata=404```
